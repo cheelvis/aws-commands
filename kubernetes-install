@@ -1,0 +1,89 @@
+Kubernetes is an open source container management tool which automates container deployment, scaling and load balancing. 
+
+ 
+
+In kubernetes, the master controls the cluster. Inside the cluster you have notes, inside the Notes you have Pods and inside the Pods you have one or more containers. 
+
+Components of kubernetes master include; API server, scheduler, control manager and etcd. 
+
+ Installing Kubernetes: 
+
+First update the server before installing docker using the command sudo apt-get update. 
+
+1- install docker using the command sudo apt-get install docker.io -y 
+
+*Go to install kubeadm and follow the documentation for clearity. However, its same as below. 
+
+2- run the command on both the master and the nodes. sudo apt-get update && sudo apt-get install -y apt-transport-https curl 
+
+3- curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add - 
+
+4- cat <<EOF | sudo tee /etc/apt/sources.list.d/kubernetes.list 
+deb https://apt.kubernetes.io/ kubernetes-xenial main 
+EOF 
+
+5- sudo apt-get update 
+
+6- sudo apt-get install -y kubelet kubeadm kubectl 
+
+ 
+
+ Now run the following command only on the master as root user to initialize it 
+
+7a- kubeadm init --apiserver-advertise-address=<private ip address of master> --pod-network-cidr=192.168.0.0/16 if using calico. 
+
+ 
+
+7b- kubeadm init --apiserver-advertise-address=<private ip address of master> --pod-network-cidr=10.217.0.0/16 if using cilium 
+
+8- if you run the above command when using the t2.micro type instance, you will get an error. Since its just for practice purpose, you can override the error as follows. kubeadm init --apiserver-advertise-address=<private ip addrees of master> --pod-network-cidr=192.168.0.0/16 --ignore-preflight-errors=NumCPU. 
+
+ 
+
+7c- kubeadm init. For weave-net. 
+
+ 
+
+9- after the above command runs successfully, you will get some commands that you will run on the master as a regular user and another command that will be run on the node as root user to join the cluster. 
+
+ 
+
+10a- run this command on the master to get the nodes ready. kubectl apply -f https://docs.projectcalico.org/v3.11/manifests/calico.yaml if using calico 
+
+ 
+
+10b- run this command on the master to get the nodes ready if using cilium. kubectl create -f https://raw.githubusercontent.com/cilium/cilium/v1.6/install/kubernetes/quick-install.yaml 
+
+ 
+
+10c- run this command on the master to get the nodes ready. kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')" is using weave-net. The url to get the command is: https://www.weave.works/docs/net/latest/kubernetes/kube-addon/#install 
+
+ 
+
+kubectl get nodes 
+
+kubectl get pods --all-namespaces 
+
+kubectl get pods --all-namespaces -o wide 
+
+kubectl create deployment nginx --image=nginx:1.7.9 
+
+kubectl delete deployment nginx1 
+
+kubectl create service nodeport nginx --tcp=80:80 
+
+kubectl get service 
+
+ 
+
+Installing wordpress using kubernetes. 
+
+ 
+
+sudo wget https://wordpress.org/latest.zip 
+
+sudo apt install -y unzip 
+
+sudo unzip latest.zip  
+
+sudo docker pull wordpress
