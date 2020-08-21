@@ -1,0 +1,39 @@
+How to install Jenkins on a red Hat linux instance. 
+
+ 1- sudo yum update -y 
+  #Install java and set path 
+2- sudo yum install java-1.8* -y 
+     - check java version using java -version 
+Ls -la, vi into the .bash_profile to set path 
+3- JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.161-0.b14.el7_4.x86_64. 
+
+    - PATH=$PATH:$JAVA_HOME:$HOME/bin. 
+
+    - export path 
+4- now install wget and hence jenkins 
+yum install wget -y 
+sudo wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins.io/redhat-stable/jenkins.repo 
+sudo rpm --import http://pkg.jenkins.io/redhat-stable/jenkins.io.key 
+sudo yum install jenkins -y 
+5- sudo service jenkins start/stop/restart 
+6- sudo chkconfig jenkins on 
+7- run this command to get jenkins password: $cat /var/lib/jenkins/secrets/initialAdminPassword 
+*don't forget to pen 8080 on the SG to everywhere. 
+8- open jenkins from a browser using the 'publicIP':8080. You will be given the location of the admin user password. Vi to that location and get the password. 
+You can change the default 8080 port to your own custom port.  
+sudo vi /etc/sysconfig/jenkins. Search for JENKINS_PORT "8080" and change to your own default port. 
+sudo vi /etc/default/jenkins use this for ubuntu 
+NB: numbeer 3 is optional. 
+Reference site: https://pkg.jenkins.io/redhat/ 
+For ubuntu server, run the following commands to install jenkins 
+1- sudo apt-get update 
+2- sudo apt install openjdk-8-jdk -y 
+3- wget -q -O - https://pkg.jenkins.io/debian/jenkins.io.key | sudo apt-key add - 
+4- sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list' 
+5- sudo apt-get update 
+6- sudo apt-get install jenkins -y 
+7- sudo systemctl start jenkins 
+Cat this location to get the password for jenkins  /var/lib/jenkins/secrets/initialAdminPassword 
+https://www.digitalocean.com/community/tutorials/how-to-install-jenkins-on-ubuntu-18-04 
+https://linuxize.com/post/how-to-install-jenkins-on-ubuntu-18-04/ 
+Use the above link if commands 3 and 4 do not rspond. 
