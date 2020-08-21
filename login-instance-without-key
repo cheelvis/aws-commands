@@ -1,0 +1,22 @@
+  How to login to an instance when the key is missing. 
+ 
+
+1: stop the instance. 
+2: detach the root volume of the instance. 
+3: attach the root volume to a recovery instance. 
+4: login to the recovery instance, work as root (sudo su) 
+5: create a mount point (mkdir -p /Test) where /Test is the name of the mount point. 
+6: mount the device on the mount point (mount -o nouuid /dev/xvdf1 /Test) where /dev/xvdf1 is the 
+device name. 
+7: copy the authorized key from the recovery instance to the instance without a key (cat /home/ec2- 
+user/.ssh/authorized_keys >> /Test/home/ec2-user/.ssh/authorized_keys) 
+8: unmount the root volume from the recovery instance(umount /Test) 
+9: mount back the root volume to the instance without the key 
+10: start the instance and login using the same key that was used to login to 
+the recovery instance. 
+
+Summary 
+1: mkdir -p /Test 
+2: mount -o nouuid /dev/xvdf1 /Test 
+3: cat /home/ec2-user/.ssh/authorized_keys >> /Test/home/ec2-user/.ssh/authorized_keys 
+4: umount /Test 
