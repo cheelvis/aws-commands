@@ -1,0 +1,7 @@
+To install maven on ubuntu, first install open jdk
+$sudo apt-get install openjdk-8-jdk -y
+Download the maven tar package and untar using the following commands;
+
+$wget https://ftp.wayne.edu/apache/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz 
+$tar xzvf apache-maven-3.6.3-bin.tar.gz
+after this, maven is ready.
