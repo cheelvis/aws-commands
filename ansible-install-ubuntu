@@ -1,0 +1,33 @@
+# First install ansible with the following commands
+$sudo apt-get update
+$sudo apt-add-repository ppa:ansible/ansible
+$sudo apt-get install ansible -y
+# install python if not present
+
+After installing ansible, open the ansible.cfg file and make the following changes;
+1- uncommend and change the inventory location as per your company. eg /opt/inventory.txt (don't forget to craete the file inventory.txt)
+2- fork from 5 to any # accepted by your company (it is the # of servers ansible can perform configuration on at the same time.
+3- host_key_checking = false, uncommend it.
+4- ssh timeout = 10, uncommend it
+5- log_path = /var/log/ansible.log, uncommand it. you can also change it to a desired location eg /opt/ansible.log
+6- deprecation_warning = True, uncommend it
+
+create goups in your inventory file using square brackets eg 
+[webservers_prd] 
+[webservers_qa] 
+[webservers_dev]
+you can also create a group of groups eg
+[webservers:children]
+webservers_prd
+webservers_qa
+webservers_dev
+
+generate and exchange ssh keys using $ssh-keygen after generating the key, it will be in /root/.ssh and the key will be in the id_rsa_.pub file. copy the key and add it to the Authorized key location of all the servers to be controlled by ansible. after copying the key, try to log using $ssh <ip-of-server-you-want-to-login>
+don't forget to enable password authentication for your servers.
+
+Ansible adhoc commands
+$ansible <group-name-in-inventry-file> -m <module-name> -a "<options>" eg
+ansible webservers -m ping
+ansible apservers -m service -a "path=/opt/abc.txt state=touch"
+
+you can check your YML syntax using $ansible-playbook <playbook-name> --syntax-check. if you get back the name of the playbook, then your syntax is correct.
