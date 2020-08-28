@@ -10,7 +10,5 @@ NB: Maven commands should be exercuted from the location of the POM.xml file
 
 To see the maven version the command is $./mvn --version
 Make maven to be available everywhere in ur system using the command
-mvn has 4 steps; compile,test-compile,test and package
-
 $export PATH=$PATH:/home/ubuntu/apache-maven-3.6.3/bin
-
+mvn has 4 steps; compile,test-compile,test and package
