@@ -23,7 +23,8 @@ Pushing a container to DockerHub
 To push a container to dockerhub, the container name must be in the form dockerhub-username/custom-name 
 10: sudo docker push cheelvis/apache  
 11: To remove a running  container, you either stop if first or run, sudo docker rm -f <CID> 
-12: to remove all containers at once, use sudo docker rm -f $(sudo docker ps -a -q) 
+12: to remove all containers at once, use sudo docker rm -f $(sudo docker ps -a -q)
+To set up a repository to push your changes, run $git remote set-url origin <url-of-ripository>
 
                                  Saving changes to a container 
 Whenever you save changes to a container, a new image is created with the name that you specified at the time of saving the changes. The command to save changes in a container 
