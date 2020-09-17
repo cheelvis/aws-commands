@@ -1,115 +1,53 @@
 Docker is a computer program that performs operating-system-level virtualization also known as "containerization" . It's used to run software packages called "containers" 
 
- 
-
 Installing Docker 
-
- 
-
 1: on windows: https://store.docker.com/editions/community/docker-ce-desktop-windows 
-
 2: on Mac: https://store.docker.com/editions/community/docker-ce-desktop-mac 
-
 3: on ubuntu: sudo apt-get update && sudo apt-get install docker.io -y 
 
- 
-
 Common Docker Commands 
-
- 
-
 1: sudo docker -version 
-
 2: sudo docker pull <image-name> eg sudo docker pull ubuntu 
-
 3: sudo docker images, used to list images 
-
 4: sudo docker run -it -d <image-name> 
-
 When command #4 is executed, a container is created. 
-
 5: to view all running containers, use sudo docker ps. To view all containers both running and stopped, use sudo docker ps -a 
-
 6: to stop a container, use sudo docker stop <container-id> 
-
 7: to go inside a container, use sudo docker exec -it <container-id> bash  
-
 While inside the container, you can run commands like update and install packges. 
-
 8: when you stop a container and it does not exit, use sudo docker kill <CID> 
-
 Sudo docker rm <CID> 
-
 9: to remove an image, use sudo docker rmi <image-id> 
-
 Pushing a container to DockerHub 
-
 -first login using sudo docker login, provide username and PW of dockerhub account. 
-
 To push a container to dockerhub, the container name must be in the form dockerhub-username/custom-name 
-
-10: sudo docker push cheelvis/apache 
-
- 11: To remove a running  container, you either stop if first or run, sudo docker rm -f <CID> 
-
+10: sudo docker push cheelvis/apache  
+11: To remove a running  container, you either stop if first or run, sudo docker rm -f <CID> 
 12: to remove all containers at once, use sudo docker rm -f $(sudo docker ps -a -q) 
 
- 
-
                                  Saving changes to a container 
-
-Whenever you save changes to a container, a new image is created with the name that you specified at the time of saving the changes. The command to save changes in a container is; sudo docker commit <CID> cheelvis/test. Where cheelvis/test is the name you want to name the image that will be created after the chage. 
-
+Whenever you save changes to a container, a new image is created with the name that you specified at the time of saving the changes. The command to save changes in a container 
+is; sudo docker commit <CID> cheelvis/test. Where cheelvis/test is the name you want to name the image that will be created after the change. 
 If you want to check whether the new image that was created when you save the changes is working fine after installing apache2 in the container, run; 
-
 sudo docker run -it  -p 85:80 -d cheelvis/test 
-
 To check the apache2 on the browser, ip:85. Where ip is the ip of the software the container is running on. 
 
- 
-
- 
-
-                              Sample Dockerfile 
-
+Sample Dockerfile 
 FROM ubuntu 
-
 RUN apt-get update 
-
 RUN DEBIAN_FRONTEND="noninteractive" apt-get -y install tzdata 
-
 RUN apt-get -y install apache2 
-
 ADD . /var/www/html 
-
 ENTRYPOINT apache2ctl -D FOREGROUND 
-
 ENV name elvisdemo 
 
- 
-
 Sample html file 
-
- 
-
 <html> 
-
 <title>Hello World</title> 
-
 <body> 
-
 <h1>Hello From Elvis</h1> 
-
 </body> 
-
 </html> 
-
- 
-
 To build a dockerfile, use sudo docker build -t <name-of-image-to-craete>, eg sudo docker build -t new-dockerfile 
-
- To run docker commands wthout sudo, run; sudo usermod  -aG docker $USER. After running the command, logout and relogin and you will run docker commands without sudo. 
-
- 
-
+To run docker commands wthout sudo, run; sudo usermod  -aG docker $USER. After running the command, logout and relogin and you will run docker commands without sudo. 
 Docker Storage 
