@@ -24,7 +24,6 @@ To push a container to dockerhub, the container name must be in the form dockerh
 10: sudo docker push cheelvis/apache  
 11: To remove a running  container, you either stop if first or run, sudo docker rm -f <CID> 
 12: to remove all containers at once, use sudo docker rm -f $(sudo docker ps -a -q)
-To set up a repository to push your changes, run $git remote set-url origin <url-of-ripository>
 
                                  Saving changes to a container 
 Whenever you save changes to a container, a new image is created with the name that you specified at the time of saving the changes. The command to save changes in a container 
@@ -32,6 +31,7 @@ is; sudo docker commit <CID> cheelvis/test. Where cheelvis/test is the name you 
 If you want to check whether the new image that was created when you save the changes is working fine after installing apache2 in the container, run; 
 sudo docker run -it  -p 85:80 -d cheelvis/test 
 To check the apache2 on the browser, ip:85. Where ip is the ip of the software the container is running on. 
+T create a Dockerfile, first create a directory, cd into it before creating the Dockerfile and the index.html file.
 
 Sample Dockerfile 
 FROM ubuntu 
@@ -49,6 +49,8 @@ Sample html file
 <h1>Hello From Elvis</h1> 
 </body> 
 </html> 
-To build a dockerfile, use sudo docker build -t <name-of-image-to-craete>, eg sudo docker build -t new-dockerfile 
+To build a dockerfile, use $sudo docker build . -t <name-of-image-to-craete>, eg sudo docker build -t new-dockerfile 
 To run docker commands wthout sudo, run; sudo usermod  -aG docker $USER. After running the command, logout and relogin and you will run docker commands without sudo. 
+
 Docker Storage 
+
