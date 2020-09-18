@@ -9,8 +9,8 @@ Common Docker Commands
 1: sudo docker -version 
 2: sudo docker pull <image-name> eg sudo docker pull ubuntu 
 3: sudo docker images, used to list images 
-4: sudo docker run -it -d <image-name> 
-When command #4 is executed, a container is created. 
+4: sudo docker run -it -p 87:80 -d <image-name> 
+When command #4 is executed, a container is created and exposed via port 87. 
 5: to view all running containers, use sudo docker ps. To view all containers both running and stopped, use sudo docker ps -a 
 6: to stop a container, use sudo docker stop <container-id> 
 7: to go inside a container, use sudo docker exec -it <container-id> bash  
