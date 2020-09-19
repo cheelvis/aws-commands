@@ -52,5 +52,9 @@ Sample html file
 To build a dockerfile, use $sudo docker build . -t <name-of-image-to-craete>, eg sudo docker build -t new-dockerfile 
 To run docker commands wthout sudo, run; sudo usermod  -aG docker $USER. After running the command, logout and relogin and you will run docker commands without sudo. 
 
+SAVING CHAGES TO A DOCKER CONTAINER
+when you save changes to a docker container, an image is created with a name that you specify at the time of saving the changes. if you have to push the image to DockerHub, the 
+image name should be in the form dockerhub username/any other name. the command to save changes in a container is $docker commit <CID> <name of image to create>
+
 Docker Storage 
 
