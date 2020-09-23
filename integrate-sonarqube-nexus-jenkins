@@ -1,0 +1,43 @@
+intergrating sonarQube with jnekins
+ sonarQube requires at least 2core procesor
+install sonarQube using a docker image;
+1-install docker
+-pull the sonarqube image from hub.docker.com using the command
+$sudo docker image pull sonarqube:lts
+2-run the image to create a container using the command
+$sudo docker run -it -p 9000:80 -d sonarqube:lts
+3-go to the browser and access sonarqube on port 9000. 
+4-provide the default user name and PW as admin admin to login.
+5-check and install the sonarqube plugin in jenkins.
+6-since sonarqube is not install on the jenkins server, go to 
+configure system and provide the server url under sonarQube server
+Name can be of your choice.
+7-under 'server authentication token' generate the token from 
+sonarqube dashboard. go to A->my Account->security->enter a name
+->click generate. copy the generated output and provide it to 
+jenkins under secret text.
+8- download and install the sonarqube scanner on the server where the 
+project code will be. https://docs.sonarqube.org/latest/analysis/scan/sonarscanner.
+copy the link address of linux 64-bit, run wget and untar it.
+provide the location of the scanner to jenkins under global tool configuration.
+ ---end---
+
+
+installing and intergrating nexus in jenkins.
+jfrog and nexus are used to store artifacks meaning the .war file
+from maven after build. this is important because if you want to
+revert to a previous build, you can just get the .war file and 
+deploy it instead of running the whole pipeline again.
+1-install docker
+pull the nexus image using the command;
+$sudo docker image pull sonatype/nexus3. 
+2-run the image to create a container using;
+$sudo docker container run -d -p 8081:8081 --name nexus sonatype/nexus3:latest
+3-go to the browser to access nexus. to login, exec into the 
+container and and cat the location given to get the PW. the 
+user name is admin.
+4- When you login to nexus, you have to create a repository 
+where you will store your code. 
+go to settings->repositories->create repository->maven2(hosted)
+provide a name and leave the rest as default, then create repo.
+
