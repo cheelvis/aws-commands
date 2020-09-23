@@ -1,0 +1,14 @@
+FROM ubuntu
+RUN apt-get update
+RUN DEBIAN_FRONTEND="noninteractive" apt-get -y install tzdata
+RUN apt-get -y install apache2
+ADD . /var/www/html
+ENTRYPOINT apachectl -D FOREGROUND
+ENV name Intellipaat 
+
+
+<html>
+<body style="background-color:green;">
+<h1>Welcome to intellipaat</h1>
+</body>
+</html>
