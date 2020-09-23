@@ -1,0 +1,59 @@
+Git is a version control system (VCS) for tracking changes in  computer files. 
+
+ Distributed version control. 
+Coordinates work between multiple developers. 
+Who made what changes and when . 
+Revert back at any time. 
+Local and remote repos. 
+
+Concepts of Git 
+
+Keeps track of code history. 
+Takes "snapshots" of your files. 
+You decide when to take a snapshot by making a "commit". 
+You can visit any snapshot at any time. 
+You can stage files before committing.
+ 
+Basic commaneds  
+
+$ git init = Initialize local Git repository. 
+$ git add <file-name> or git add . To add all files 
+$ git status, checks status of working tree. 
+$ git commit -m "custom message" 
+$ git remote add origin "URL of remote repository" 
+$ git push origin master, then provide username and password 
+After running command #v and you want to push your code to  different repo., simply specify the URL of that repository after git push. 
+eg git push "repository URL"  
+$ git clone is how you get a local copy of an existing repository to your local system. It's usually only used once for a given repository. 
+Command: git clone <URL of repository> 
+git pull (or fetch+merge) is how you update that local repository with new commits from the remote repository. Command; git pull origin master 
+To copy the entire repo., use git clone. To update your local repo., use git pull. 
+To create a branch, use git branch <name of new branch> 
+To delete a branch, use git branch –D <branch name> 
+To list existing branches, use git branch 
+To switch to a particular branch use git checkout <branch name> 
+To see the history of your repository, use git log 
+git stash is a command that will help hide your file that has not been committed if you want to quickly do something on another branch. 
+When you are back in the branch were the file was hidden and you want 
+to see the file , use git stash pop. 
+To stash untracked files, use git stash –u 
+git revert <commit –id>, commit-id can be gotten from the output of git log. 
+git diff is a command that helps in checking the difference between two versions of a file. git diff <commit-id of version x> <commit-id of version y> or the d/f b/w two commits. 
+To see the commit-ids in one place when working with multiple branches, use git log --graph --pretty=online 
+To merge something on a remote repo., use git merge and to merge something on
+a local repo., use git rebase. Git merge <branch-name>, git rebase <branch-name> 
+Git merge conflicts: this occurs when two developers make changes in the same
+file and want to commit their changes back to the master branch. In this case a conflict will arise when developer two wants to merge his own 
+changes  after developer one has already merged his changes to the master
+branch. To resolve the conflict, we use the git mergetool which helps in opening a vi editor so we can manually remove unwanted line, save the changed and then commit it again.  
+To merge branch A to branch B, you need to checkout to branch B and then run 
+git merge A for A=branch-name 
+A Forg is a copy of a repository. It is used to copy someone else's
+repository to your repo., in GitHub. 
+
+Installing Git 
+
+ubuntu(Debian) = $ sudo apt-get install git -y 
+Linux (Fedora) = $ sudo yum install git -y 
+Mac = http://git-scm.com/download/mac. 
+Windows = http://git-scm.com/download/win
