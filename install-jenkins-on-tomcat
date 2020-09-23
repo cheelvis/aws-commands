@@ -1,0 +1,12 @@
+install jenkins on Tomcat
+1-update the server and cd /opt.
+2-install java ($sudo apt-get install -y openjdk-8-jdk)
+3-go to (https://tomcat.apache.org/download-80.cgi), under 
+Binary Distributions,copy the link tar.gz, run wget and untar it.
+4-go to (https://www.jenkins.io/download/), copy Generic Java 
+package (.war) link. run wget but do NOT untar it.
+5-cd to tomcat (the untar version), cd webapps, run the command
+$cp /opt/jenkins.war .
+6-cd to bin and run ./startup.sh the output should say tomcat 
+started.
+7-Access tomcat on port 8080 and jenkins on port 8080/jenkins
