@@ -17,7 +17,7 @@ Now run the following command only on the master as root user to initialize it
 7b- kubeadm init --apiserver-advertise-address=<private ip address of master> --pod-network-cidr=10.217.0.0/16 if using cilium 
 8- if you run the above command when using the t2.micro type instance, you will get an error. Since its just for practice purpose, you can override the error as follows. 
 kubeadm init --apiserver-advertise-address=<private ip addrees of master> --pod-network-cidr=192.168.0.0/16 --ignore-preflight-errors=NumCPU. 
-7c- kubeadm init. For weave-net. 
+7c- sudo kubeadm init. For weave-net. 
 9- after the above command runs successfully, you will get some commands that you will run on the master as a regular user and another command that will be run on the node as 
 root user to join the cluster. 
 10a- run this command on the master to get the nodes ready. kubectl apply -f https://docs.projectcalico.org/v3.11/manifests/calico.yaml if using calico 
@@ -37,3 +37,6 @@ sudo wget https://wordpress.org/latest.zip
 sudo apt install -y unzip 
 sudo unzip latest.zip  
 sudo docker pull wordpress
+
+To login to a pod the command is $kubectl exec -i --tty <pod-name> -- bash
+
