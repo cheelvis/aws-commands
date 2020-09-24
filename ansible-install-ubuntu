@@ -27,7 +27,7 @@ it to authorize_keys location of all the servers to be controlled by ansible. af
 don't forget to enable password authentication for your servers.
 
 NB:the content in id_rsa, in authorized_keys directory is the same as the content of the private key that can be provided to jenkins to connect servers.
-if you dc ./ssh and do ls, you will see authorized_keys
+if you cd ./ssh and do ls, you will see authorized_keys
 
 Ansible adhoc commands
 $ansible <group-name-in-inventry-file> -m <module-name> -a "<options>" eg
