@@ -1,4 +1,4 @@
-How to install Jenkins on a red Hat linux instance. 
+## How to install Jenkins on a red Hat linux instance. 
 
  1- sudo yum update -y 
   #Install java and set path 
@@ -25,7 +25,7 @@ sudo vi /etc/sysconfig/jenkins. Search for JENKINS_PORT "8080" and change to you
 sudo vi /etc/default/jenkins use this for ubuntu 
 NB: numbeer 3 is optional. 
 Reference site: https://pkg.jenkins.io/redhat/ 
-For ubuntu server, run the following commands to install jenkins 
+## How to install jenkins on ubuntu 
 1- sudo apt-get update 
 2- sudo apt install openjdk-8-jdk -y 
 3- wget -q -O - https://pkg.jenkins.io/debian/jenkins.io.key | sudo apt-key add - 
