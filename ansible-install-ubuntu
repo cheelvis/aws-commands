@@ -22,7 +22,8 @@ webservers_prd
 webservers_qa
 webservers_dev
 
-cd to ./ssh, generate and exchange ssh keys using $ssh-keygen after generating the key, it will be in /root/.ssh and the key will be in the id_rsa.pub file. copy the key and add it to the 
+cd to ./ssh, generate and exchange ssh keys using $ssh-keygen after generating the key, it will be in /root/.ssh and the key will be in the id_rsa.pub file. 
+copy the key and add it to the 
 it to authorize_keys location of all the servers to be controlled by ansible. after copying the key, try to log using $ssh <ip-of-server-you-want-to-login>
 don't forget to enable password authentication for your servers.
 
