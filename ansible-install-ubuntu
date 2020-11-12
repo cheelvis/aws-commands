@@ -2,9 +2,10 @@
 $sudo apt-get update
 $sudo apt-add-repository ppa:ansible/ansible
 $sudo apt-get install ansible -y
-# install python if not present
+NB: Ansible is installed only in the master server.python is installed by default on ubuntu servers. 
+# install python on the remote servers if using RedHat or linux
 
-After installing ansible, open the ansible.cfg file and make the following changes;
+After installing ansible, cd to /etc/ansible, then vi to the ansible.cfg file and make the following changes;
 1- uncommend and change the inventory location as per your company. eg /opt/inventory.txt (don't forget to craete the file inventory.txt)
 2- fork from 5 to any # accepted by your company (it is the # of servers ansible can perform configuration on at the same time.
 3- host_key_checking = false, uncommend it.
@@ -22,9 +23,12 @@ webservers_prd
 webservers_qa
 webservers_dev
 
-cd to ./ssh, generate and exchange ssh keys using $ssh-keygen after generating the key, it will be in /root/.ssh and the key will be in the id_rsa.pub file. 
+**you need to be rootin other to see the .ssh folder. (sudo su)
+cd to /opt, generate and exchange ssh keys using $ssh-keygen after generating the key, it will be in /root/.ssh and the key will be in the id_rsa.pub file. 
 copy the key and add 
-it to authorize_keys location of all the servers to be controlled by ansible. after copying the key, try to log using $ssh <ip-of-server-you-want-to-login>
+it to authorize_keys location of all the servers to be controlled by ansible. To get to the authorized_keys file, proceed as follows;
+sudo su, ls -a, cd .ssh, ls
+after copying the key, try to log using $ssh <ip-of-server-you-want-to-login>
 don't forget to enable password authentication for your servers.
 
 NB:the content in id_rsa, in authorized_keys directory is the same as the content of the private key that can be provided to jenkins to connect servers.
