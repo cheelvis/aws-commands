@@ -5,7 +5,9 @@ install sonarQube using a docker image;
 -pull the sonarqube image from hub.docker.com using the command
 $sudo docker image pull sonarqube:lts
 2-run the image to create a container using the command
-$sudo docker run -it -p 9000:80 -d sonarqube:lts
+$sudo docker run -it -p 9000:80 -d sonarqube:lts or
+docker run -d --name sonarqube -e SONAR_ES_BOOTSTRAP_CHECKS_DISABLE=true -p 9000:9000 
+sonarqube:latest.
 3-go to the browser and access sonarqube on port 9000. 
 4-provide the default user name and PW as admin admin to login.
 5-check and install the sonarqube plugin in jenkins.
@@ -32,7 +34,8 @@ deploy it instead of running the whole pipeline again.
 pull the nexus image using the command;
 $sudo docker image pull sonatype/nexus3. 
 2-run the image to create a container using;
-$sudo docker container run -d -p 8081:8081 --name nexus sonatype/nexus3:latest
+$sudo docker container run -d -p 8081:8081 --name nexus sonatype/nexus3:latest or
+docker run -d -p 8081:8081 --name nexus sonatype/nexus3
 3-go to the browser to access nexus. to login, exec into the 
 container and and cat the location given to get the PW. the 
 user name is admin.
