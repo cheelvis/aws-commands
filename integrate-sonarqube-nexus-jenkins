@@ -19,8 +19,9 @@ sonarqube dashboard. go to A->my Account->security->enter a name
 ->click generate. copy the generated output and provide it to 
 jenkins under secret text.
 8- download and install the sonarqube scanner on the server where the 
-project code will be. https://docs.sonarqube.org/latest/analysis/scan/sonarscanner.
-copy the link address of linux 64-bit, run wget and untar it.
+project code will be. https://docs.sonarqube.org/latest/analysis/scan/sonarscanner. or run
+https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.5.0.2216-linux.zip
+copy the link address of linux 64-bit, run wget and unzip it.
 provide the location of the scanner to jenkins under global tool configuration.
  ---end---
 
