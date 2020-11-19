@@ -32,7 +32,7 @@ Reference site: https://pkg.jenkins.io/redhat/
 4- sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list' 
 5- sudo apt-get update 
 6- sudo apt-get install jenkins -y 
-7- sudo systemctl start jenkins 
+7- sudo systemctl status jenkins 
 Cat this location to get the password for jenkins  /var/lib/jenkins/secrets/initialAdminPassword 
 https://www.digitalocean.com/community/tutorials/how-to-install-jenkins-on-ubuntu-18-04 
 https://linuxize.com/post/how-to-install-jenkins-on-ubuntu-18-04/ 
