@@ -33,7 +33,7 @@ revert to a previous build, you can just get the .war file and
 deploy it instead of running the whole pipeline again.
 1-install docker
 pull the nexus image using the command;
-$sudo docker image pull sonatype/nexus3. 
+$sudo docker image pull sonatype/nexus3:latest. 
 2-run the image to create a container using;
 $sudo docker container run -d -p 8081:8081 --name nexus sonatype/nexus3:latest or
 docker run -d -p 8081:8081 --name nexus sonatype/nexus3
