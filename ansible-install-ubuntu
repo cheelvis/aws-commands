@@ -12,6 +12,7 @@ After installing ansible, cd to /etc/ansible, then vi to the ansible.cfg file an
 4- ssh timeout = 10, uncommend it
 5- log_path = /var/log/ansible.log, uncommand it. you can also change it to a desired location eg /opt/ansible.log
 6- deprecation_warning = True, uncommend it
+# if you are working as root and wnat to use ansible to deploy an application, uncommend remote_user = root in ansible.cfg
 
 create goups in your inventory file using square brackets eg 
 [webservers_prd] 
