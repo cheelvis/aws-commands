@@ -1,0 +1,189 @@
+END TO END CI/CD PIPELINE
+#SECTION 0: servers
+- server1: install jenkins, (ust2 micro)
+- server2: install JAVA, maven, ansible (use t2 micro)code will reside here
+- server3: install sonarqube (use atleast 2core, 2gb RAM)
+- server4: install Nexus (use atleast 2core, 2gb RAM)
+- server5: install JAVA, TomCat its the deployment server(t2 mi)
+
+SECTION 1 Install Jenkins on Ubuntu 18.04
+sudo apt-get update
+sudo apt install openjdk-8-jdk -y
+wget -q -O - https://pkg.jenkins.io/debian/jenkins.io.key | sudo apt-key add -
+sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
+sudo apt-get update
+sudo apt-get install jenkins -y
+
+sudo systemctl status jenkins
+
+#Ansible installation
+
+sudo apt-get update
+sudo apt-add-repository ppa:ansible/ansible
+sudo apt-get install ansible -y
+
+#After installing ansible, cd to /etc/ansible, then vi to the ansible.cfg file and make the following changes;
+1- uncommend and change the inventory location as per your company. eg /opt/inventory.txt (don't forget to craete the file inventory.txt)
+2- fork from 5 to any # accepted by your company (it is the # of servers ansible can perform configuration on at the same time.
+3- host_key_checking = false, uncommend it.
+4- ssh timeout = 10, uncommend it
+5- log_path = /var/log/ansible.log, uncommand it. you can also change it to a desired location eg /opt/ansible.log
+6- deprecation_warning = True, uncommend it
+# if you are working as root and wnat to use ansible to deploy an application, uncommend remote_user = root in ansible.cfg
+
+#Alternatively, jenkins can be installed from a docker image as follows;
+
+#First intall docker 
+
+sudo apt-get update
+
+sudo apt-get install -y\
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    software-properties-common
+
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
+sudo add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable"
+
+sudo apt-get update
+sudo apt-get install -y docker-ce
+
+#Pull the docker images
+
+docker pull jenkins/jenkins:lts
+
+#run the image to create the container
+
+docker run -d -p 8080:8080 -p 50000:50000 jenkins/jenkins:lts
+
+#To run docker commands without sudo: sudo usermod -aG docker $USER
+#logout and login, then you can run the commands without sudo.
+
+SECTION 2 connect worker nodes to the jenkins master.
+
+#prsequisite; JAVA MUST installed on the worker nodes, Ref SECTION1.
+#Provide the path to the jenkins master under Global tool configuration.
+#The location of java can be found by running the following;
+
+which java
+ls -l /usr/bin/java
+ls -l /etc/alternatives/java
+#the location of java will be in
+/usr/lib/jvm/java-8-openjdk-amd64/
+
+#Now connect the worker node as follows;
+manage jenkins-> manage nodes and Clouds->New Node->Provide a name->ok
+#on the next page under # of executors, put 10,under Remote root directory,
+enter /home/ubuntu/jenkins,under labels, put a name to uniquely identify the node,
+under usage,leave as default, under Launch method, select launch agents via ssh,
+provide the ip of the node, under credentials, click Add and then jenkins,
+under kind, select SSH Username with private key, under ID and Description, 
+enter a name that will identify the credential, under username, give ubuntu, under
+Private Key, select Enter directly, click Add, copy the pem file that was used
+to login to the instance and paste in the field, click Add. click save
+select the node and click configure, the select the crets and click save.
+
+#SECTION 3: install sonarqube using a docker image
+docker pull sonarqube:latest
+docker run -d --name sonarqube -e SONAR_ES_BOOTSTRAP_CHECKS_DISABLE=true -p 9000:9000 sonarqube:latest
+
+-go to the browser and access sonarqube on port 9000. 
+-provide the default user name and PW as admin admin to login.
+-check and install the sonarqube plugin in jenkins.
+-since sonarqube is not install on the jenkins server, go to 
+configure system and provide the server url under sonarQube server
+Name can be of your choice.
+-under 'server authentication token' generate the token from 
+sonarqube dashboard. go to A->my Account->security->enter a name
+->click generate. copy the generated output and provide it to 
+jenkins under secret text.
+
+#install the sonarqube scanner on the server where the code will be downloaded;
+download and install the sonarqube scanner on the server where the 
+project code will be. https://docs.sonarqube.org/latest/analysis/scan/sonarscanner or run
+-wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.5.0.2216-linux.zip
+copy the link address of linux 64-bit, run wget and untar it.
+provide the location of the scanner to jenkins under global tool 
+
+
+#SECTION 4: install nexus using a docker image
+sudo docker pull sonatype/nexus3
+docker run -d -p 8081:8081 --name nexus sonatype/nexus3
+
+#SECTION 5: install maven on the server where the code will be downloaded
+
+To install maven on ubuntu, first install open jdk
+$sudo apt-get install openjdk-8-jdk -y
+go to https://maven.apache.org/download.cgi or run
+wget https://downloads.apache.org/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz
+Download the maven tar package under Binary tar.gz archive link and untar it. 
+$tar xzvf apache-maven-3.6.3-bin.tar.gz
+after this, maven is ready.
+
+NB: Maven commands should be exercuted from the location of the POM.xml file
+To see the maven version, cd to bin and run $./mvn -version
+Make maven to be available everywhere in ur system using the command
+$export PATH=$PATH:/home/ubuntu/apache-maven-3.6.3/bin while in the bin directory
+mvn has 4 steps; compile,test-compile,test and package
+to start working with maven, cd to where the java code and the POM.xml file is and install tree
+using the command $sudo atp-get install tree -y
+tree will help you see the directory folder in a tree format.
+
+#SECTION 6: install java and tomcat on the deployment servers.
+
+1-update the server and cd /opt.
+2-install java ($sudo apt-get install -y openjdk-8-jdk)
+3-go to (https://tomcat.apache.org/download-80.cgi), under 
+Binary Distributions,copy the link tar.gz, or run 
+wget https://mirrors.gigenet.com/apache/tomcat/tomcat-8/v8.5.60/bin/apache-tomcat-8.5.60.tar.gz
+4-go to (https://www.jenkins.io/download/), copy Generic Java 
+package (.war) link. run wget but do NOT untar it.
+5-cd to tomcat (the untar version), cd webapps, run the command
+$cp /opt/jenkins.war .
+6-cd to bin and run ./startup.sh the output should say tomcat 
+started.
+7-Access tomcat on port 8080 and jenkins on port 8080/jenkins
+
+# To configure jenkins to talk to a K8s cluster,add the K8s credentials in jenkins.
+
+#Method1 install the k8s plugin in jenkins.
+
+go to -> manage jenkins->manage credentials->in the drop down menue near (global),
+select add credentials->in the box next to kind, select K8s configuration(kubeconfig),
+provide the ID and the Description as KUBERNETES_CLUSTER_CONFIG and kubernetes config respectively.
+select Entry Directly under kubeconfig.
+copy the content of the config file in the K8s master and provide it to jenkins,
+run this command to get the content $cat .kube/config.
+# configure the step as follows:
+kubernetesDeploy(
+    configs: 'springBootMongo.yml',
+    kubeConfigId: 'KUBERNETES_CLUSTER_CONFIG',
+    enableConfigSubstitution: true
+    )
+
+#configs is the name of the kubernetes deployment file=springBootMongo.yml 
+#kubeConfigId is the ID name given at the time of creating the credentials.
+
+#Method2
+
+instead of installing the k8s plugin, we can connect to a k8s cluster by installing
+kubectl(k8s cli) on the server where the code is downloaded.
+
+$sudo snap install kubectl --classic
+
+switch to user ubuntu; sudo -i -u ubuntu
+create a .kube folder in the jenkins home directory.
+cd ~
+mkdir .kube
+create a config file in the .kube folder, $vi .kube/config
+copy the cofig file in the k8s master and put in the config file that you created in the jenkins server
+
+
+ 
+
+
