@@ -141,7 +141,9 @@ tree will help you see the directory folder in a tree format.
 3-go to (https://tomcat.apache.org/download-80.cgi), under 
 Binary Distributions,copy the link tar.gz, or run 
 wget https://mirrors.gigenet.com/apache/tomcat/tomcat-8/v8.5.60/bin/apache-tomcat-8.5.60.tar.gz
-4-go to (https://www.jenkins.io/download/), copy Generic Java 
+tar xzvf apache-tomcat-8.5.60.tar.gz
+
+##4-go to (https://www.jenkins.io/download/), copy Generic Java 
 package (.war) link. run wget but do NOT untar it.
 5-cd to tomcat (the untar version), cd webapps, run the command
 $cp /opt/jenkins.war .
