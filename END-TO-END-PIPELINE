@@ -27,9 +27,9 @@ sudo apt-get install ansible -y
 2- fork from 5 to any # accepted by your company (it is the # of servers ansible can perform configuration on at the same time.
 3- host_key_checking = false, uncommend it.
 4- ssh timeout = 10, uncommend it
-5- log_path = /var/log/ansible.log, uncommand it. you can also change it to a desired location eg /opt/ansible.log
-6- deprecation_warning = True, uncommend it
-# if you are working as root and wnat to use ansible to deploy an application, uncommend remote_user = root in ansible.cfg
+5- remote_user = root, uncommend it when you want to use ansible to deploy an application. 
+6- log_path = /var/log/ansible.log, uncommand it. you can also change it to a desired location eg /opt/ansible.log
+7- deprecation_warning = True, uncommend it
 
 #Alternatively, jenkins can be installed from a docker image as follows;
 
