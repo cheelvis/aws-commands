@@ -179,11 +179,11 @@ kubectl(k8s cli) on the server where the code is downloaded.
 $sudo snap install kubectl --classic
 
 switch to user ubuntu; sudo -i -u ubuntu
-create a .kube folder in the jenkins home directory.
+create a .kube folder in the ubuntu home directory.
 cd ~
 mkdir .kube
 create a config file in the .kube folder, $vi .kube/config
-copy the cofig file in the k8s master and put in the config file that you created in the jenkins server
+copy the cofig file in the k8s master and put in the config file that you created above.
 
 
  
