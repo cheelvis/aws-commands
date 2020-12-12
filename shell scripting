@@ -1,0 +1,26 @@
+# shell scripting is a group of commands written in a sequence to automate repetitive work or tasks
+# A shell is a program that provides an interface b/w a user and an OS kernel.
+Some common types of shell include; bash, sh, ksh, c, etc.
+# To know which type of shell is asigned to a user, run the command which $SHELL.
+# To see the types of shells that an OS has the command is cat /etc/shells.
+bash shell is the advanced shell and it's the default shell for most linux OSs.
+A shell script always starts with #!/bin/bash, its known as shibang
+
+sudo cat /etc/httpd/conf/httpd.conf | grep listen, command to see which port httpd is listening
+# To remove a file the comand is rm -rf <file name>
+
+#How  to run user defined shell script as a system command
+eg how to get free RAM size in MB(magabytes)
+run free -m, you will have an output as shown below
+
+              total        used        free      shared  buff/cache   available
+Mem:            978         127         422           0         427         709
+Swap:             0           0           0
+since you want to know only the free RAM size, run; free -m | awk 'NR==2{print $4, "MB(megabytes)"}'
+create a shell script and put the above command inside. vi freeramsize, make the file exercutable, sudo chmod 755 <freeramsize>
+copy the command to one of the predefined locations. to see the predefined locations, the command is echo $PATH. for ubuntu, you will as shown below.
+/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin.
+
+create a directory call bin and move the file there, mkdir bin, move freeramsize bin/
+
+
