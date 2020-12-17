@@ -18,7 +18,7 @@ Mem:            978         127         422           0         427         709
 Swap:             0           0           0
 since you want to know only the free RAM size, run; free -m | awk 'NR==2{print $4, "MB(megabytes)"}'
 create a shell script and put the above command inside. vi freeramsize, make the file exercutable, sudo chmod 755 <freeramsize>
-copy the command to one of the predefined locations. to see the predefined locations, the command is echo $PATH. for ubuntu, you will as shown below.
+copy the file you created to one of the predefined locations. to see the predefined locations, the command is echo $PATH. for ubuntu, you will as shown below.
 /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin.
 
 ctrl d will take you out of cat.
