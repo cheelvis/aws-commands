@@ -21,6 +21,69 @@ create a shell script and put the above command inside. vi freeramsize, make the
 copy the command to one of the predefined locations. to see the predefined locations, the command is echo $PATH. for ubuntu, you will as shown below.
 /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin.
 
-create a directory call bin and move the file there, mkdir bin, move freeramsize bin/
+ctrl d will take you out of cat.
+to add something in a file using the cat command, use two angle brackets (>>) eg, cat >> 'write here'
+
+commend multiple lines in a code as follows; eg : ' 
+                                                    line 1
+                                                    line 2
+                                                    line3
+                                                    line x'
+if you want to show commented lines in your output you can use the heredog delimeter as shown bellow.
+cat << kreativ
+this is hello text
+another line
+kreativ
+
+## IF and elif conditions:
 
 
+count=10
+
+##if [ $count -eq 10 ] you can use square brackets or simple brackets if you want to use symbols eg (( $count > 10 ))
+
+if [ $count -eq 10 ]
+then
+    echo 'the condition is true'
+elif (( $count <= 9 ))
+then
+    echo 'the condition is true'
+
+else
+    echo 'the condition is false'
+fi
+
+##AND, OR condition
+age=10
+
+if [[ "$age" -gt 9  &&  "$age" -lt 40 ]] or [ "$age" -gt 9 ] && [ "$age" -lt 40 ] or [ "$age" -gt 9  -a  "$age" -lt 40 ] {AND syntax}
+if [ "$age" -gt 20  -o  "$age" -lt 40 ] or [[ "$age" -gt 20  ||  "$age" -lt 40 ]] or [ "$age" -gt 20 ]  || [ "$age" -lt 40 ] {OR syntax}
+then
+    echo 'age is correct'
+else
+    echo 'age is not correct'
+fi
+
+## WHILE LOOP
+
+number=2
+
+while [ $number -lt 10 ]
+do
+  echo "$number"
+  number=$(( number+2 ))
+done
+## UNTILL LOOP
+numbner=1
+untill [ $number -ge 10 ]
+do
+  echo $number
+  number=$(( number+1 ))
+done 
+
+#FOR LOOP
+for i in 1 2 3 4 5 or for i in {0..10} it will print 0 to 10 or for i in {0..10..2} it will count in incraement of 2 or for (( i=0; i<5; i++ ))
+do
+  echo $i
+done
+  
