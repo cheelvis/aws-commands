@@ -1,6 +1,6 @@
 END TO END CI/CD PIPELINE
 #SECTION 0: servers
-- server1: install jenkins, (ust2 micro)
+- server1: install jenkins, (use t2 micro)
 - server2: install JAVA, maven, ansible (use t2 micro)code will reside here
 - server3: install sonarqube (use atleast 2core, 2gb RAM)
 - server4: install Nexus (use atleast 2core, 2gb RAM)
