@@ -1,0 +1,2 @@
+To configure webhook on jenkins, use the jenkins url followed by /github-webhook/ eg
+http://18.222.56.27:8080/github-webhook/
