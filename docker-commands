@@ -29,6 +29,7 @@ To push a container to dockerhub, the container name must be in the form dockerh
 #logout and login, then you can run the commands without sudo.
 
 # To see last 10 commands: history | head -10
+# docker info
 
 
                                  Saving changes to a container 
@@ -61,6 +62,9 @@ To run docker commands wthout sudo, run; sudo usermod  -aG docker $USER. After r
 SAVING CHAGES TO A DOCKER CONTAINER
 when you save changes to a docker container, an image is created with a name that you specify at the time of saving the changes. if you have to push the image to DockerHub, the 
 image name should be in the form dockerhub username/any other name. the command to save changes in a container is $docker commit <CID> <name of image to create>
+
+Docker Swarm
+docker swarm init --advertise-addr=<ip of leader>
 
 Docker Storage 
 
