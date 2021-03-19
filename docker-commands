@@ -25,6 +25,12 @@ To push a container to dockerhub, the container name must be in the form dockerh
 11: To remove a running  container, you either stop if first or run, sudo docker rm -f <CID> 
 12: to remove all containers at once, use sudo docker rm -f $(sudo docker ps -a -q)
 
+#To run docker commands without sudo: sudo usermod -aG docker $USER
+#logout and login, then you can run the commands without sudo.
+
+# To see last 10 commands: history | head -10
+
+
                                  Saving changes to a container 
 Whenever you save changes to a container, a new image is created with the name that you specified at the time of saving the changes. The command to save changes in a container 
 is; sudo docker commit <CID> cheelvis/test. Where cheelvis/test is the name you want to name the image that will be created after the change. 
