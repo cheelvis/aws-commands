@@ -65,6 +65,9 @@ image name should be in the form dockerhub username/any other name. the command 
 
 Docker Swarm
 docker swarm init --advertise-addr=<ip of leader>
+after this, you will be provided with a command that you will run on the workers to join the cluster
+to see the workers on the leader, the command is docker node ls
+to remove a node from a cluster: docker swarm leave --force
 
 Docker Storage 
 
