@@ -1,0 +1,18 @@
+create two buckets, with the name of you website eg www.juliennedesign.com and juliennedesign.com.
+make the buckets public
+put the content of your website in the bucket with www and make the objects public.
+enable website hosting in the buckets under properties. for Hosting type, select Host a static website in the bucket that has the content (the one with the www).
+under index document, write index.html.
+for the bucket without www, select Redirect requests for an object under Hosting type and the provide the name of the bucket that has the content under Host name.
+In other to make your site secure, incorporate it with CloudFront.
+
+First request a certificate in AWS certificate manager. NB: you must be in the us-east-1(N. Virginia region) when requesting the certificate b4 it can work. 
+Create a CF distribution. 
+1- seletc the name of the bucket that has the content under Origin Domain Name
+2- select Redirect HTTP to HTTPS under Viewer Protocol Policy.
+3- select yes under Restrict Bucket Access so that the content of the bucket can be accessed only via CF.
+4- write www.juliennedesign.com or *.juliennedesign.com under Alternate Domain Names.
+4- select Custom SSL Certificate under SSL Certificate, then choose the certificate that you created above.
+5- write index.html under Default Root Object, then create the distribution.
+Go the R53 and create a record that will point to the CloudFront Distribution (CFD) Domain name.
+copy and paste the Domain name under alias to CFD, then create the record.
