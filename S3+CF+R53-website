@@ -12,7 +12,7 @@ Create a CF distribution.
 2- select Redirect HTTP to HTTPS under Viewer Protocol Policy.
 3- select yes under Restrict Bucket Access so that the content of the bucket can be accessed only via CF.
 4- write www.juliennedesign.com or *.juliennedesign.com under Alternate Domain Names.
-4- select Custom SSL Certificate under SSL Certificate, then choose the certificate that you created above.
-5- write index.html under Default Root Object, then create the distribution.
+5- select Custom SSL Certificate under SSL Certificate, then choose the certificate that you created above.
+6- write index.html under Default Root Object, then create the distribution.
 Go the R53 and create a record that will point to the CloudFront Distribution (CFD) Domain name.
 copy and paste the Domain name under alias to CFD, then create the record.
